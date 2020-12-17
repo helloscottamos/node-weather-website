@@ -9,8 +9,16 @@ const forecast = (long, lat, callback) => {
         }else if(body.error) {
             callback('Error code :'+body.error.code)
         }else{
+
+            const current = body.current
+
+            let description = 'The local dateime is '+body.location.localtime +'.'
+            description += '\nThe current weather is '+current.weather_descriptions[0]+'.'
+            description += '\nThere is a '+current.precip+'% chance of rain.'
+            description += '\nIt is currently '+current.temperature+' degrees outside but it feels like '+current.feelslike
+
             callback(undefined, {
-                description: body.current.weather_descriptions[0]
+                description: description
             })
         }
     })
